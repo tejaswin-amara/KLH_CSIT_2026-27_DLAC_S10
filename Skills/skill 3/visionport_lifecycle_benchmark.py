@@ -1,3 +1,4 @@
+import time
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -6,6 +7,8 @@ def build_benchmark_figure(concurrency_levels=None):
     if concurrency_levels is None:
         concurrency_levels = [1, 4, 8, 16]
 
+    # Simulated realistic latencies (ms) for each lifecycle stage across concurrency
+    # [API Ingress, Preprocessing, GPU Inference (TensorRT), Postprocessing]
     ingress_latencies = [1.2, 1.5, 2.1, 3.4]
     preprocessing_latencies = [4.5, 4.8, 5.2, 6.0]
     gpu_inference_latencies = [8.3, 9.1, 11.5, 15.2]
@@ -64,11 +67,11 @@ def build_benchmark_figure(concurrency_levels=None):
         + np.array(gpu_inference_latencies)
         + np.array(postprocessing_latencies)
     )
-    for idx, total in enumerate(totals):
+    for i in range(len(concurrency_levels)):
         ax.text(
-            x[idx],
-            total + 0.5,
-            f"{total:.1f} ms",
+            x[i],
+            total[i] + 0.5,
+            f"{total[i]:.1f} ms",
             ha="center",
             va="bottom",
             fontweight="bold",
@@ -81,10 +84,12 @@ def build_benchmark_figure(concurrency_levels=None):
 
 def run_advanced_benchmark(output_filename="visionport_lifecycle_breakdown.png"):
     assert output_filename.endswith(".png"), "Output filename must end with .png"
+    start_time = time.perf_counter()
     print("Running VisionPort Lifecycle Component Breakdown Benchmark...")
     fig = build_benchmark_figure()
     fig.savefig(output_filename, dpi=300)
-    print(f"Success! New component breakdown graph saved as '{output_filename}'.")
+    elapsed_ms = (time.perf_counter() - start_time) * 1000
+    print(f"Success! New component breakdown graph saved as '{output_filename}' ({elapsed_ms:.2f} ms).")
     plt.show()
 
 

@@ -61,42 +61,11 @@ Rather than treating neural networks as hardware-agnostic scripts, this course t
 
 ---
 
-<a id="curriculum-map"></a>
 ## 🗺️ Curriculum Architecture Map
 
 ```mermaid
-flowchart TB
-    subgraph M1["MODULE 1 · The Deep Learning System as a Whole"]
-        A1["Client -> API Gateway -> Triton -> TensorRT -> GPU"] --> A2["Training vs. Inference Compute/Memory Split"]
-        A2 --> A3["Request Tracing & GPU Economics (H100/A100/L40S/4090)"]
-    end
-
-    subgraph M2["MODULE 2 · Inference Optimisation"]
-        B1["Quantisation: FP32 -> FP16 -> INT8 -> INT4 (PTQ & QAT)"] --> B2["Structured/Unstructured Pruning & Distillation"]
-        B2 --> B3["PyTorch -> ONNX -> TensorRT & Static/Dynamic Batching"]
-    end
-
-    subgraph M3["MODULE 3 · Training Deep Networks"]
-        C1["PyTorch Autograd & Custom Backward Functions"] --> C2["SGD, AdamW, Lion, LR Schedules & AMP Loss Scaling"]
-        C2 --> C3["Gradient Accumulation, DDP All-Reduce & Checkpointing"]
-    end
-
-    subgraph M4["MODULE 4 · Deep Learning Architectures"]
-        D1["CNNs (ResNet, EfficientNet) & Detectors (YOLO, RetinaNet)"] --> D2["Transformer Math (Q, K, V, RoPE, Pre/Post-Norm)"]
-        D2 --> D3["Vision Transformers (ViT) & Hybrids (ConvNeXt, Swin)"]
-    end
-
-    subgraph M5["MODULE 5 · Tensor Primitives & PyTorch Internals"]
-        E1["Memory Layout: Strides, Contiguity, .view() vs. .reshape()"] --> E2["Broadcasting, In-Place Safety & Activation Checkpointing"]
-        E2 --> E3["Bottleneck Analysis with torch.profiler & TensorBoard"]
-    end
-
-    subgraph M6["MODULE 6 · GPU & Accelerated Computing"]
-        F1["SIMT & CUDA Hierarchy: Threads -> Warps -> Blocks -> Grids"] --> F2["Memory Hierarchy (Registers/Shared/HBM) & Tiled GEMM"]
-        F2 --> F3["Occupancy, Coalescing, Nsight Compute & AI Accelerators"]
-    end
-
-    M1 --> M2 --> M3 --> M4 --> M5 --> M6
+flowchart LR
+    M1["Module 1: DL System"] --> M2["Module 2: Inference Opt"] --> M3["Module 3: Training Scale"] --> M4["Module 4: Architectures"] --> M5["Module 5: Tensor Primitives"] --> M6["Module 6: GPU & CUDA"]
 ```
 
 ---

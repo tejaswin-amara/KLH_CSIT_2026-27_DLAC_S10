@@ -70,8 +70,8 @@ def build_benchmark_figure(concurrency_levels=None):
     for i in range(len(concurrency_levels)):
         ax.text(
             x[i],
-            total[i] + 0.5,
-            f"{total[i]:.1f} ms",
+            totals[i] + 0.5,
+            f"{totals[i]:.1f} ms",
             ha="center",
             va="bottom",
             fontweight="bold",
